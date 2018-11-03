@@ -1,30 +1,33 @@
+/**
+ *
+ * Footer
+ *
+ */
+
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+// import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { MdKeyboardVoice } from 'react-icons/md';
 
-import A from 'components/A';
-import LocaleToggle from 'containers/LocaleToggle';
-import Wrapper from './Wrapper';
-import messages from './messages';
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  &: hover {
+    color: grey;
+  }
+`;
 
-function Footer() {
-  return (
-    <Wrapper>
-      <section>
-        <FormattedMessage {...messages.licenseMessage} />
-      </section>
-      <section>
-        <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
-          }}
-        />
-      </section>
-    </Wrapper>
-  );
+/* eslint-disable react/prefer-stateless-function */
+class Footer extends React.PureComponent {
+  render() {
+    return (
+      <Wrapper>
+        <MdKeyboardVoice size={40} />
+      </Wrapper>
+    );
+  }
 }
+
+Footer.propTypes = {};
 
 export default Footer;

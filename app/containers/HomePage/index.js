@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
 
 import injectReducer from 'utils/injectReducer';
@@ -32,67 +33,48 @@ import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import WelcomeScreen from '../../components/WelcomeScreen';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import MainScreen from '../../components/MainScreen';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
 
 /* eslint-disable react/prefer-stateless-function */
 export class HomePage extends React.PureComponent {
   /**
    * when initial state username is not null, submit the form to load repos
    */
+  state = {
+    loading: true,
+  };
+
   componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
+    if (this.state.loading) {
+      setTimeout(() => {
+        this.setState({
+          loading: false,
+        });
+      }, 10000);
     }
   }
 
   render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
-      loading,
-      error,
-      repos,
-    };
-
+    // if (this.state.loading) {
+    //   return (
+    //     <Wrapper>
+    //       <WelcomeScreen />
+    //     </Wrapper>
+    //   );
+    // }
     return (
-      <article>
-        <Helmet>
-          <title>Home Page</title>
-          <meta
-            name="description"
-            content="A React.js Boilerplate application homepage"
-          />
-        </Helmet>
-        <div>
-          <CenteredSection>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </CenteredSection>
-          <Section>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <Form onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </Form>
-            <ReposList {...reposListProps} />
-          </Section>
-        </div>
-      </article>
+      <Wrapper>
+        <MainScreen />
+      </Wrapper>
     );
   }
 }
