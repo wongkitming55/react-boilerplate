@@ -29,16 +29,55 @@ const Wrapper = styled.div`
   &: div {
     background: red;
   }
-  &. slick-track {
-    width: 100%;
+  . slick-track {
+    width: 70px;
+    justify-content: center;
+    align-items: center;
   }
+
+ .slick-slide {
+   outline: none;
+   height: 100vh;
+   text-align: center;
+   color: white;
+   font-size: 20px;
+   display: table !important;
+
+ }
+
+ .slick-slide div {
+   outline: none;
+   display: table-cell;
+   vertical-align: middle;
+
+ }
+
+.slick-slide.c {
+    display: inline-block;
+    vertical-align: middle;
+    float:none;
+}
+
+
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled.div` 
+  text-align: center;
   width: 350px;
-  height: 500px;
+  height: 350px;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
+  img {
+    transition: opacity 5s ease-in;
+    width: 50%;
+    margin: 0 auto;
+    width: ${(props) => props.selected ? '250px' : 'transform: scale(1,1)'};
+    height: ${(props) => props.selected ? '250px' : 'transform: scale(1,1)'};
+  }
+  span {
+    font-size: 50px;	
+    visibility: ${(props) => props.selected ? 'visible' : 'hidden'} ;
+  }
 `;
 
 const imageArr = [blanket, call, drinks, food, form, medical, shopping];
@@ -51,27 +90,42 @@ export default class MainScreen extends React.PureComponent {
   }
 
   renderItems = () =>
-    imageArr.map((item, i) => (
-      <ImageWrapper>
-        <img src={item} key={`img${i}`} />
+    imageArr.map((item, i) => {
+      console.log(this.state.activeSlide2, i)
+      return (
+      <ImageWrapper selected={this.state.activeSlide2 === i}>
+        <img src={item} key={`img${i}`}  />
+	<span>blanket</span>
       </ImageWrapper>
-    ));
+    )});
+
+
+  state = {
+    activeSlide: 0,
+    activeSlide2: 0
+  };
 
   render() {
     const settings = {
       dots: false,
       infinite: true,
       focusOnSelect: true,
-      slidesToShow: 4,
+      slidesToShow: 5,
       slidesToScroll: 1,
       centerMode: true,
-      speed: 500,
+      speed: 200,
+      beforeChange: (current, next) => this.setState({ activeSlide: next }),
+      afterChange: current => this.setState({ activeSlide2: current })
     };
     return (
-      <Wrapper>
-        <Slider style={{ background, height: '100%' }} {...settings}>
-          {this.renderItems()}
-        </Slider>
+     
+      <Wrapper style={{ backgroundImage: 'url(' + require('./images/background.png') + ')', backgroundSize: 'cover',
+            overflow: 'hidden'}}>
+  
+            <Slider {...settings}>
+             {this.renderItems()}
+           </Slider>
+   
       </Wrapper>
     );
   }
