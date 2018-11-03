@@ -76,7 +76,36 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const imageArr = [blanket, call, drinks, food, form, medical, shopping];
+const imageArr = [
+  {
+    name: 'blanket',
+    image: blanket,
+  },
+  {
+    name: 'call',
+    image: call,
+  },
+  {
+    name: 'drinks',
+    image: drinks,
+  },
+  {
+    name: 'food',
+    image: food,
+  },
+  {
+    name: 'form',
+    image: form,
+  },
+  {
+    name: 'medical',
+    image: medical,
+  },
+  {
+    name: 'shopping',
+    image: shopping,
+  },
+];
 
 /* eslint-disable react/prefer-stateless-function */
 export default class MainScreen extends React.PureComponent {
@@ -85,12 +114,16 @@ export default class MainScreen extends React.PureComponent {
     elements.style.background = background;
   }
 
+  onItemClick = () => {
+    this.props.selectService();
+  };
+
   renderItems = () =>
     imageArr.map((item, i) => {
       console.log(this.state.activeSlide2, i);
       return (
         <ImageWrapper selected={this.state.activeSlide2 === i}>
-          <img src={item} key={`img${i}`} />
+          <img src={item} key={`img_${item.name}`} />
           <span>blanket</span>
         </ImageWrapper>
       );
@@ -129,6 +162,7 @@ export default class MainScreen extends React.PureComponent {
 
 MainScreen.propTypes = {
   items: PropTypes.array,
+  selectService: PropTypes.func,
 };
 
 // export default MainScreen;

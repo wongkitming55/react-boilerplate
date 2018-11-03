@@ -11,11 +11,7 @@ const Wrapper = styled.div`
 /* eslint-disable react/prefer-stateless-function */
 class Header extends React.Component {
   render() {
-    return (
-      <Wrapper>
-
-      </Wrapper>
-    );
+    return <Wrapper />;
   }
 }
 
