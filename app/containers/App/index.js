@@ -21,10 +21,8 @@ import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
   max-width: 100%;
-  margin: 0 auto;
   display: flex;
   min-height: 100%;
-  padding: 0 16px;
   flex-direction: column;
 `;
 
@@ -37,13 +35,9 @@ export default function App() {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
-        <Route path="" component={NotFoundPage} />
       </Switch>
-      <Footer />
       <GlobalStyle />
     </AppWrapper>
   );

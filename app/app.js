@@ -28,7 +28,8 @@ import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 
 import configureStore from './configureStore';
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 // Import i18n messages
 import { translationMessages } from './i18n';
 

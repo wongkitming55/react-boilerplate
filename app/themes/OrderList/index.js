@@ -37,9 +37,9 @@ const List = styled.div`
 
 const AddNewButton = styled.button`
   background-color: transparent;
-  border: 2px dashed #AEDD00;
+  border: 2px dashed #aedd00;
   border-radius: 0.7rem;
-  color: #AEDD00;
+  color: #aedd00;
   width: 15.33rem;
   height: 20.67rem;
   margin: 0.67rem;
@@ -58,7 +58,6 @@ export const SearchBar = styled.div`
   width: 83.4rem;
   height: 3.33rem;
 `;
-
 
 class OrderList extends Component {
   static propTypes = {
@@ -81,7 +80,6 @@ class OrderList extends Component {
   //     />
   //   </OrderWrapper>
   // ));
-
 
   render() {
     return (
