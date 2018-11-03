@@ -139,7 +139,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#ebedec',
     overflow: 'scroll',
-    height: '350px',
+    height: '400px',
   },
 };
 

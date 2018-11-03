@@ -19,6 +19,7 @@ import saga from './saga';
 import MainScreen from '../../components/MainScreen';
 import DrinkService from '../../components/DrinkService';
 import ChatBox from '../../components/ChatBot';
+import Notification from '../../components/Notification';
 
 const Wrapper = styled.div`
   position: relative;
@@ -38,6 +39,7 @@ export class HomePage extends React.PureComponent {
       loading: true,
       selectedService: null,
       selectedDrink: null,
+      showNoti: false,
     };
   }
 
@@ -54,6 +56,7 @@ export class HomePage extends React.PureComponent {
   selectService = serviceName => {
     this.setState({
       selectedService: serviceName,
+      showNoti: serviceName === 'Medical Help',
     });
   };
 
@@ -61,7 +64,7 @@ export class HomePage extends React.PureComponent {
     this.setState({
       selectedDrink: drink,
       selectedService: null,
-      chatVisible: true,
+      showNoti: true,
     });
   };
 
@@ -85,6 +88,7 @@ export class HomePage extends React.PureComponent {
       <Wrapper>
         <MainScreen selectService={this.selectService} />
         {selectedService === 'Blanket' ? <ChatBox /> : null}
+        <Notification active={this.state.showNoti} />
       </Wrapper>
     );
   }

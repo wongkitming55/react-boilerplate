@@ -23,11 +23,14 @@ import form from './images/form.png';
 import medical from './images/medical.png';
 import shopping from './images/shopping.png';
 import background from './images/background.png';
-import { duration, fadeInLeft, fadeOut } from '../../animations';
+import { duration, fadeIn } from '../../animations';
 
 const Wrapper = styled.div`
   height: 100%;
   position: relative;
+  background-image: ${`url(${background})`};
+  background-size: cover;
+  overflow: hidden;
   &: div {
     background: red;
   }
@@ -57,6 +60,7 @@ const Wrapper = styled.div`
     vertical-align: middle;
     float: none;
   }
+  animation: ${fadeIn} ${duration * 2}s;
 `;
 
 const ImageWrapper = styled.div`
@@ -67,14 +71,15 @@ const ImageWrapper = styled.div`
   align-items: center;
   position: relative;
   img {
-    transition: opacity 5s ease-in;
+    transition: all 0.5s;
+    transform: scale(1.05, 1.05);
     width: 50%;
     margin: 0 auto;
-    transition: width, height 2s ease;
-    width: ${props => (props.selected ? '250px' : 'transform: scale(1,1)')};
-    height: ${props => (props.selected ? '250px' : 'transform: scale(1,1)')};
+    width: ${props => (props.selected ? '250px' : '133px')};
+    height: ${props => (props.selected ? '250px' : '143px')};
   }
   span {
+    padding-top: 10px;
     font-size: 40px;
     visibility: ${props => (props.selected ? 'visible' : 'hidden')};
   }
@@ -102,7 +107,7 @@ const imageArr = [
     image: form,
   },
   {
-    name: 'Medical',
+    name: 'Medical Help',
     image: medical,
   },
   {
@@ -149,13 +154,7 @@ export default class MainScreen extends React.PureComponent {
       afterChange: current => this.setState({ activeSlide2: current }),
     };
     return (
-      <Wrapper
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundSize: 'cover',
-          overflow: 'hidden',
-        }}
-      >
+      <Wrapper>
         <Slider {...settings}>{this.renderItems()}</Slider>
       </Wrapper>
     );

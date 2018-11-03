@@ -10,6 +10,7 @@ import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import { duration, fadeIn } from '../../animations';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -17,6 +18,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   overflow: scroll;
+  animation: ${fadeIn} ${duration * 2}s;
 `;
 
 const DrinkItem = styled.div`
