@@ -35,48 +35,44 @@ const Wrapper = styled.div`
     align-items: center;
   }
 
- .slick-slide {
-   outline: none;
-   height: 100vh;
-   text-align: center;
-   color: white;
-   font-size: 20px;
-   display: table !important;
+  .slick-slide {
+    outline: none;
+    height: 100vh;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    display: table !important;
+  }
 
- }
+  .slick-slide div {
+    outline: none;
+    display: table-cell;
+    vertical-align: middle;
+  }
 
- .slick-slide div {
-   outline: none;
-   display: table-cell;
-   vertical-align: middle;
-
- }
-
-.slick-slide.c {
+  .slick-slide.c {
     display: inline-block;
     vertical-align: middle;
-    float:none;
-}
-
-
+    float: none;
+  }
 `;
 
-const ImageWrapper = styled.div` 
+const ImageWrapper = styled.div`
   text-align: center;
   width: 350px;
   height: 350px;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   img {
     transition: opacity 5s ease-in;
     width: 50%;
     margin: 0 auto;
-    width: ${(props) => props.selected ? '250px' : 'transform: scale(1,1)'};
-    height: ${(props) => props.selected ? '250px' : 'transform: scale(1,1)'};
+    width: ${props => (props.selected ? '250px' : 'transform: scale(1,1)')};
+    height: ${props => (props.selected ? '250px' : 'transform: scale(1,1)')};
   }
   span {
-    font-size: 50px;	
-    visibility: ${(props) => props.selected ? 'visible' : 'hidden'} ;
+    font-size: 50px;
+    visibility: ${props => (props.selected ? 'visible' : 'hidden')};
   }
 `;
 
@@ -91,18 +87,18 @@ export default class MainScreen extends React.PureComponent {
 
   renderItems = () =>
     imageArr.map((item, i) => {
-      console.log(this.state.activeSlide2, i)
+      console.log(this.state.activeSlide2, i);
       return (
-      <ImageWrapper selected={this.state.activeSlide2 === i}>
-        <img src={item} key={`img${i}`}  />
-	<span>blanket</span>
-      </ImageWrapper>
-    )});
-
+        <ImageWrapper selected={this.state.activeSlide2 === i}>
+          <img src={item} key={`img${i}`} />
+          <span>blanket</span>
+        </ImageWrapper>
+      );
+    });
 
   state = {
     activeSlide: 0,
-    activeSlide2: 0
+    activeSlide2: 0,
   };
 
   render() {
@@ -115,17 +111,17 @@ export default class MainScreen extends React.PureComponent {
       centerMode: true,
       speed: 200,
       beforeChange: (current, next) => this.setState({ activeSlide: next }),
-      afterChange: current => this.setState({ activeSlide2: current })
+      afterChange: current => this.setState({ activeSlide2: current }),
     };
     return (
-     
-      <Wrapper style={{ backgroundImage: 'url(' + require('./images/background.png') + ')', backgroundSize: 'cover',
-            overflow: 'hidden'}}>
-  
-            <Slider {...settings}>
-             {this.renderItems()}
-           </Slider>
-   
+      <Wrapper
+        style={{
+          backgroundImage: `url(${require('./images/background.png')})`,
+          backgroundSize: 'cover',
+          overflow: 'hidden',
+        }}
+      >
+        > ><Slider {...settings}>{this.renderItems()}</Slider>
       </Wrapper>
     );
   }
