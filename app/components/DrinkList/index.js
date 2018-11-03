@@ -58,12 +58,21 @@ class DrinkList extends React.PureComponent {
     });
   };
 
+  handleItemClick = drink => {
+    this.props.selectDrink(drink);
+  };
+
   renderItems = () =>
     this.props.items.map(item => (
       <DrinkItem
         key={item.name}
         onMouseEnter={() => this.handleMouseEnter(item.name)}
         onMouseLeave={this.handleMouseLeave}
+        onClick={() => {
+          if (item.name === 'House Wine') {
+            this.handleItemClick(item.name);
+          }
+        }}
       >
         <img src={item.image} />
         <DrinkLabel hover={this.state.hoverItem === item.name}>
@@ -79,6 +88,7 @@ class DrinkList extends React.PureComponent {
 
 DrinkList.propTypes = {
   items: PropTypes.array,
+  selectDrink: PropTypes.func,
 };
 
 export default DrinkList;

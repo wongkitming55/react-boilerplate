@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  animation: ${fadeIn} ${duration}s;
+  animation: ${fadeIn} ${duration * 2}s;
 `;
 
 /* eslint-disable react/prefer-stateless-function */

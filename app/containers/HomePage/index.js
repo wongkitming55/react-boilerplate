@@ -18,8 +18,10 @@ import reducer from './reducer';
 import saga from './saga';
 import MainScreen from '../../components/MainScreen';
 import DrinkService from '../../components/DrinkService';
+import ChatBox from '../../components/ChatBot';
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -34,7 +36,7 @@ export class HomePage extends React.PureComponent {
     super(props);
     this.state = {
       loading: true,
-      selectedService: 'drinks',
+      selectedService: null,
       selectedDrink: null,
     };
   }
@@ -58,11 +60,10 @@ export class HomePage extends React.PureComponent {
   selectDrink = drink => {
     this.setState({
       selectedDrink: drink,
+      selectedService: null,
+      chatVisible: true,
     });
   };
-
-  // renderDrinkService = () => (
-  // );
 
   render() {
     // if (this.state.loading) {
@@ -73,24 +74,23 @@ export class HomePage extends React.PureComponent {
     //   );
     // }
     const { selectedService } = this.state;
-    if (selectedService === 'drinks') {
+    if (selectedService === 'Drinks') {
       return (
         <Wrapper>
           <DrinkService selectDrink={this.selectDrink} />
         </Wrapper>
       );
     }
-
     return (
       <Wrapper>
         <MainScreen selectService={this.selectService} />
+        {selectedService === 'Blanket' ? <ChatBox /> : null}
       </Wrapper>
     );
   }
 }
 
 HomePage.propTypes = {};
-
 export function mapDispatchToProps(dispatch) {
   return {
     onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),

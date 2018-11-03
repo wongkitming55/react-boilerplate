@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import background from '../MainScreen/images/background.png';
@@ -41,11 +41,11 @@ const images = [
     image: warmwater,
   },
   {
-    name: 'Orange',
+    name: 'Orange Juice',
     image: orange,
   },
   {
-    name: 'Apple',
+    name: 'Apple Juice',
     image: apple,
   },
   {
@@ -76,10 +76,12 @@ export default class DrinkService extends React.PureComponent {
           overflow: 'hidden',
         }}
       >
-        <DrinkList items={images} />
+        <DrinkList selectDrink={this.props.selectDrink} items={images} />
       </Wrapper>
     );
   }
 }
 
-DrinkService.propTypes = {};
+DrinkService.propTypes = {
+  selectDrink: PropTypes.func,
+};

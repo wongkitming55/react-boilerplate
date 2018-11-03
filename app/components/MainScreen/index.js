@@ -23,9 +23,11 @@ import form from './images/form.png';
 import medical from './images/medical.png';
 import shopping from './images/shopping.png';
 import background from './images/background.png';
+import { duration, fadeInLeft, fadeOut } from '../../animations';
 
 const Wrapper = styled.div`
   height: 100%;
+  position: relative;
   &: div {
     background: red;
   }
@@ -63,74 +65,75 @@ const ImageWrapper = styled.div`
   height: 350px;
   justify-content: center;
   align-items: center;
+  position: relative;
   img {
     transition: opacity 5s ease-in;
     width: 50%;
     margin: 0 auto;
+    transition: width, height 2s ease;
     width: ${props => (props.selected ? '250px' : 'transform: scale(1,1)')};
     height: ${props => (props.selected ? '250px' : 'transform: scale(1,1)')};
   }
   span {
-    font-size: 50px;
+    font-size: 40px;
     visibility: ${props => (props.selected ? 'visible' : 'hidden')};
   }
 `;
 
 const imageArr = [
   {
-    name: 'blanket',
+    name: 'Blanket',
     image: blanket,
   },
   {
-    name: 'call',
+    name: 'Call Cabin Crew',
     image: call,
   },
   {
-    name: 'drinks',
+    name: 'Drinks',
     image: drinks,
   },
   {
-    name: 'food',
+    name: 'Food',
     image: food,
   },
   {
-    name: 'form',
+    name: 'Forms',
     image: form,
   },
   {
-    name: 'medical',
+    name: 'Medical',
     image: medical,
   },
   {
-    name: 'shopping',
+    name: 'Shopping',
     image: shopping,
   },
 ];
 
 /* eslint-disable react/prefer-stateless-function */
 export default class MainScreen extends React.PureComponent {
-  componentDidMount() {
-    const elements = ReactDOM.findDOMNode(this).children[0];
-    elements.style.background = background;
-  }
-
-  onItemClick = () => {
-    this.props.selectService();
+  onItemClick = service => {
+    this.props.selectService(service);
   };
 
   renderItems = () =>
-    imageArr.map((item, i) => {
-      console.log(this.state.activeSlide2, i);
-      return (
-        <ImageWrapper selected={this.state.activeSlide2 === i}>
-          <img src={item} key={`img_${item.name}`} />
-          <span>blanket</span>
-        </ImageWrapper>
-      );
-    });
+    imageArr.map((item, i) => (
+      <ImageWrapper
+        key={`img_${item.name}`}
+        onClick={() => {
+          if (this.state.activeSlide2 === i) {
+            this.onItemClick(item.name);
+          }
+        }}
+        selected={this.state.activeSlide2 === i}
+      >
+        <img src={item.image} key={`img_${item.name}`} />
+        <span>{item.name}</span>
+      </ImageWrapper>
+    ));
 
   state = {
-    activeSlide: 0,
     activeSlide2: 0,
   };
 
@@ -143,18 +146,17 @@ export default class MainScreen extends React.PureComponent {
       slidesToScroll: 1,
       centerMode: true,
       speed: 200,
-      beforeChange: (current, next) => this.setState({ activeSlide: next }),
       afterChange: current => this.setState({ activeSlide2: current }),
     };
     return (
       <Wrapper
         style={{
-          backgroundImage: `url(${require('./images/background.png')})`,
+          backgroundImage: `url(${background})`,
           backgroundSize: 'cover',
           overflow: 'hidden',
         }}
       >
-        > ><Slider {...settings}>{this.renderItems()}</Slider>
+        <Slider {...settings}>{this.renderItems()}</Slider>
       </Wrapper>
     );
   }
