@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { ChatFeed, Message } from 'react-chat-ui';
 import { duration, fadeInUp } from '../../animations';
+import { HomePage } from '../../containers/HomePage';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -94,7 +96,14 @@ class ChatBox extends Component {
 
   renderYesNo = () => (
     <ButtonWrapper>
-      <ReplyButton onClick={this.handleOk}>Yes</ReplyButton>
+      <ReplyButton
+        onClick={() => {
+          this.handleOk();
+          this.props.requestService('HotWater');
+        }}
+      >
+        Yes
+      </ReplyButton>
       <ReplyButton>No</ReplyButton>
     </ButtonWrapper>
   );
@@ -116,6 +125,10 @@ class ChatBox extends Component {
     );
   }
 }
+
+ChatBox.propTypes = {
+  requestService: PropTypes.func,
+};
 
 const styles = {
   bubbleStyles: {

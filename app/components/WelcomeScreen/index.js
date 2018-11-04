@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 
 const TextWrapper = styled.div`
   animation: ${fadeIn} ${duration * 2}s;
+  font-size: 28px;
 `;
 
 /* eslint-disable react/prefer-stateless-function */

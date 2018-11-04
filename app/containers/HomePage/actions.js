@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import { CHANGE_USERNAME, REQUEST_SERVICE } from './constants';
 
 /**
  * Changes the input field of the form
@@ -28,5 +28,11 @@ export function changeUsername(name) {
   return {
     type: CHANGE_USERNAME,
     name,
+  };
+}
+export function requestService(service) {
+  return {
+    type: REQUEST_SERVICE,
+    service,
   };
 }
