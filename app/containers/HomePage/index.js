@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
+import CabinSeatMap from 'components/CabinSeatMap';
+import CustomerSeat from 'components/CustomerSeat';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
@@ -40,8 +42,14 @@ import MainScreen from '../../components/MainScreen';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  height: 100vh;
+  flex-direction: row;
+`;
+
+const FirstWrapper = styled.div`
+  width: 50%;
+`;
+const SecondWrapper = styled.div`
+  width: 50%;
 `;
 
 /* eslint-disable react/prefer-stateless-function */
@@ -73,7 +81,12 @@ export class HomePage extends React.PureComponent {
     // }
     return (
       <Wrapper>
-        <MainScreen />
+        <FirstWrapper>
+          <CustomerSeat />
+        </FirstWrapper>
+        <SecondWrapper>
+          <CabinSeatMap />
+        </SecondWrapper>
       </Wrapper>
     );
   }
