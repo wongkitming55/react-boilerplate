@@ -1,0 +1,10 @@
+/*//change the down side color*/
+.normalheader {
+  background-color: #8E8573;
+  background-position: right;
+  background-size: 100px 50px;
+  display: block;
+  background-position:95% 85%;
+  background-image: url("./Processing label.png");
+  color: white;
+}
